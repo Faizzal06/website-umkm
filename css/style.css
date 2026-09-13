@@ -1,8 +1,32 @@
+.skip-link { position: absolute; left: -9999px; padding: 8px 12px; color: white; background: #2f2118; }
+.skip-link:focus { top: 8px; left: 8px; }
+
 body {
   margin: 0;
   color: #2f2118;
   background: #f6f0e8;
   font-family: Arial, sans-serif;
+}
+
+.site-header {
+  padding: 24px 20px;
+  background: #ffd166;
+  display: flex;
+  justify-content: space-between;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 16px;
 }
 
 .page {
@@ -62,4 +86,11 @@ button {
 
 .location-section p {
   margin: 0;
+}
+
+.site-footer {
+  margin-top: 32px;
+  padding: 16px 10px;
+  background: #ffd166;
+  text-align: center;
 }
