@@ -19,6 +19,12 @@
   left: 8px;
 }
 
+nav a {
+  color: var(--ivory);
+  text-decoration: none;
+  margin-left: 16px;
+}
+
 body {
   margin: 0;
   color: var(--charcoal);
