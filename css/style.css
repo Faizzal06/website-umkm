@@ -96,21 +96,23 @@ button {
   margin: 0;
 }
 
-.product-list{
+.product-list {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
 }
 
-.product-card{
+.product-card {
   border: 1px solid var(--charcoal);
   border-radius: 12px;
   max-width: 300px;
   text-align: center;
   padding: 8px;
+  margin: 0 8px;
 }
 
-.product-card img{
+.product-card img {
   max-width: 100%;
+  border-radius: 8px;
 }
 
 .operational-hours {
@@ -177,7 +179,53 @@ button {
   font-size: 0.9rem;
   line-height: 1.5;
 }
-table { width: 100%; border-collapse: collapse; }
-caption { margin-bottom: 8px; font-weight: 700; text-align: left; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-align: left;
+}
+
 th,
-td { padding: 10px; text-align: left; border: 1px solid #dccbbc; }
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #dccbbc;
+}
+
+.title-center {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.story-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: top;
+  justify-content: center;
+}
+
+.profile-card {
+  flex: 0 0 300px;
+  margin: 0;
+  text-align: center;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.story-content {
+  flex: 1;
+  max-width: 600px;
+}
