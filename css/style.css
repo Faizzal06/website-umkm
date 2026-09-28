@@ -229,3 +229,40 @@ td {
   flex: 1;
   max-width: 600px;
 }
+
+
+#form-kontak {
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--ivory);
+  border: 1px solid #dccbbc;
+  border-radius: 12px;
+}
+.field { margin-bottom: 16px; }
+.field label { 
+  display: block; 
+  margin: 0 0 4px;
+  max-width: 100%;
+ }
+
+ .field input, .field textarea { 
+  width: 100%; 
+  padding: 8px; 
+  border: 1px solid #dccbbc; 
+  border-radius: 4px; 
+  box-sizing: border-box;
+  color: var(--charcoal);
+  background: var(--ivory);
+ }
+
+ .field select { 
+  width: 100%; 
+  padding: 8px; 
+  border: 1px solid #dccbbc; 
+  border-radius: 4px; 
+  box-sizing: border-box;
+  color: var(--charcoal);
+  background: var(--ivory);
+ }
+fieldset { margin: 0 0 16px; }
+#preview-form { padding: 16px; white-space: pre-wrap; background: white; border: 1px solid #dccbbc; }
