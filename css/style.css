@@ -266,3 +266,31 @@ td {
  }
 fieldset { margin: 0 0 16px; }
 #preview-form { padding: 16px; white-space: pre-wrap; background: white; border: 1px solid #dccbbc; }
+
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--brown);
+  outline-offset: 2px;
+}
+
+.pilihan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 8px;
+}
+
+.pilihan label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hint {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--brown);
+}
