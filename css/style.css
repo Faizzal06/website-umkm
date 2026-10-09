@@ -123,38 +123,27 @@ body {
 }
 
 .hero {
-  position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
   min-height: 360px;
   padding: var(--space-6);
   color: var(--color-on-primary);
   background: var(--color-primary);
   border-radius: var(--radius-xl);
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.hero::before {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background: rgb(23 38 45 / 65%);
-  content: "";
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
+  flex: 1;
 }
 
 .hero-image {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  flex: 0 0 42%;
+  width: 42%;
+  height: 288px;
   object-fit: cover;
+  border-radius: var(--radius-md);
 }
 
 .eyebrow {
@@ -185,11 +174,15 @@ button:hover {
 }
 
 .product-card {
-  border: 1px solid var(--color-text);
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   text-align: left;
   padding: var(--space-3);
-  margin: var(--space-2);
+  margin: 0;
+  background: var(--color-surface-raised);
 }
 
 .product-card h3 {
@@ -232,17 +225,19 @@ button:hover {
 }
 
 .product-grid,
-.gallery-grid {
+.gallery-grid,
+.product-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-3);
 }
 
 .media-card {
-  display: inline-block;
-  vertical-align: top;
-  width: 200px;
-  margin: 0 8px 16px;
+  display: block;
+  min-width: 0;
+  width: auto;
+  height: 100%;
+  margin: 0;
   padding: 10px;
   overflow: hidden;
   border: 1px solid var(--color-text);
@@ -298,7 +293,7 @@ td {
   align-items: start;
   max-width: 920px;
   margin: 0 auto;
-}   
+}
 
 .profile-card {
   display: flex;
@@ -330,6 +325,47 @@ td {
   border-radius: var(--radius-pill);
   font-size: 0.8rem;
   font-weight: 700;
+}
+
+.product-badge {
+  align-self: flex-start;
+  margin-bottom: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  color: var(--color-text);
+  background: var(--color-accent);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.price {
+  font-weight: 700;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-3);
+}
+
+.card-actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  color: var(--color-text);
+  background: var(--color-accent);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card-actions .button:hover {
+  color: var(--color-on-primary);
+  background: var(--color-primary-strong);
 }
 
 #form-kontak {
