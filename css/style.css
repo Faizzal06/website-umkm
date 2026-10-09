@@ -45,10 +45,17 @@
 }
 
 .nav {
+  display: flex;
+  flex-wrap: wrap;              
+  align-items: center;       
+  justify-content: space-between;
+  gap: var(--space-3);
   max-width: 920px;
   margin: 0 auto;
-  white-space: nowrap;
 }
+
+.nav ul { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.nav li { margin-right: 0; }   
 
 .brand {
   display: inline-block;
@@ -57,19 +64,6 @@
   font-weight: 800;
   text-decoration: none;
   vertical-align: middle;
-}
-
-.nav ul {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  vertical-align: middle;
-}
-
-.nav li {
-  display: inline-block;
-  margin-right: 16px;
 }
 
 .nav li:last-child {
@@ -129,10 +123,38 @@ body {
 }
 
 .hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 360px;
   padding: var(--space-6);
   color: var(--color-on-primary);
   background: var(--color-primary);
   border-radius: var(--radius-xl);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgb(23 38 45 / 65%);
+  content: "";
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-image {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .eyebrow {
@@ -141,9 +163,7 @@ body {
   text-transform: uppercase;
 }
 
-.products {
-  padding-left: 1.2rem;
-}
+.products { display: flex; flex-direction: column; gap: var(--space-2); }
 
 button {
   padding: 12px 18px;
@@ -196,6 +216,7 @@ button:hover {
 }
 
 .contacts {
+  display: flex; flex-direction: column; gap: var(--space-1);
   background-color: var(--color-surface);
   border: 2px solid var(--color-muted);
   border-radius: var(--radius-xl);
@@ -210,9 +231,11 @@ button:hover {
   text-align: center;
 }
 
-.gallery-list {
-  width: 100%;
-  text-align: center;
+.product-grid,
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
 }
 
 .media-card {
@@ -269,16 +292,25 @@ td {
 }
 
 .story-container {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
   max-width: 920px;
   margin: 0 auto;
-  overflow: auto;
-}
+}   
 
 .profile-card {
-  float: left;
-  width: 300px;
-  margin: 0 2rem 1rem 0;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+}
+
+.story-content {
+  min-width: 0;
 }
 
 .profile-image {
@@ -287,9 +319,17 @@ td {
   display: block;
 }
 
-.story-content {
-  margin-left: 332px;
-  max-width: 600px;
+.badge {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-accent);
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 #form-kontak {
