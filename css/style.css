@@ -34,6 +34,7 @@
 .skip-link {
   position: absolute;
   left: -9999px;
+  z-index: 1;
   padding: var(--space-2) 12px;
   color: var(--color-on-primary);
   background: var(--color-text);
@@ -60,6 +61,7 @@
   display: inline-block;
   margin-right: 40px;
   color: var(--color-on-primary);
+  font-size: clamp(1.125rem, 2vw + 0.75rem, 1.5rem);
   font-weight: 800;
   text-decoration: none;
   vertical-align: middle;
@@ -82,11 +84,6 @@
   text-decoration: underline;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
-}
 body {
   margin: 0;
   color: var(--color-text);
@@ -108,6 +105,7 @@ body {
 }
 
 .profile-image {
+  display: block;
   width: 100%;
   max-width: 400px;
   height: auto;
@@ -118,7 +116,7 @@ body {
 .page {
   max-width: 920px;
   margin: 0 auto;
-  padding: var(--space-5) 20px;
+  padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 20px);
 }
 
 .hero {
@@ -126,7 +124,7 @@ body {
   flex-direction: column;
   gap: var(--space-4);
   min-height: auto;
-  padding: var(--space-5) var(--space-4);
+  padding: clamp(16px, 3.5vw, 32px) clamp(16px, 3vw, 24px);
   color: var(--color-on-primary);
   background: var(--color-primary);
   border-radius: var(--radius-xl);
@@ -251,7 +249,7 @@ button:hover {
 .media-card figcaption {
   margin: 10px var(--space-1) var(--space-1);
   color: var(--color-text);
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 0.4vw + 0.8rem, 0.95rem);
   line-height: 1.5;
 }
 
@@ -291,7 +289,7 @@ td {
 .title-center {
   margin-top: var(--space-5);
   text-align: center;
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
   font-weight: bold;
 }
 
@@ -315,12 +313,6 @@ td {
 
 .story-content {
   min-width: 0;
-}
-
-.profile-image {
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 .badge {
@@ -426,7 +418,7 @@ select:focus-visible,
 textarea:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 .field input:not([type="radio"]):focus-visible,
@@ -442,25 +434,11 @@ button:focus-visible {
   color: var(--color-muted);
 }
 
-/* 1. Audit Button / background (Specificity: Element vs Property Asli) */
-button {
-  background-color: #cccccc;
-}
-
-/* 2. Audit Link / color (Cascade: Duplicate Class Selector / Source Order) */
-.nav a {
-  color: #ff0000;
-}
-.nav a {
-  color: var(--color-on-primary); 
-}
-
-/* 3. Audit Input / font (Explicit Reset dari User Agent Stylesheet) */
+/* Audit Input / font (Explicit Reset dari User Agent Stylesheet) */
 .field input, .field select, .field textarea {
   font-family: inherit; 
 }
 
-/* 4. Audit Heading / line-height (Direct Target vs Inheritance) */
 body {
   line-height: 1.6; 
 }
@@ -468,12 +446,8 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
-/* 5. Audit Komponen Pilihan / Product Card Title (Specificity) */
 .product-card h3 {
   color: var(--color-text); 
-}
-h3 {
-  color: blue;
 }
 
 @media (min-width: 42rem) {          /* 672px */
