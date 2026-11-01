@@ -14,7 +14,13 @@
   <header class="site-header">
     <nav class="nav" aria-label="Navigasi utama">
       <a class="brand" href="index.html">Nusantara Lestari Coffee</a>
-      <ul>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+        <span>Menu</span>
+      </button>
+      <ul id="nav-links">
         <li><a href="index.html">Beranda</a></li>
         <li><a href="tentang.html">Tentang Kami</a></li>
         <li><a aria-current="page" href="produk.html">Produk</a></li>
@@ -62,6 +68,14 @@
           </div>
         </article>
       </div>
+    </section>
+    <section class="section" aria-labelledby="produk-dinamis-title">
+      <div class="section-header">
+        <p class="eyebrow">Data JavaScript</p>
+        <h2 id="produk-dinamis-title">Produk dari Data Lokal</h2>
+        <p id="produk-ringkasan">Data produk akan dimuat melalui JavaScript.</p>
+      </div>
+      <div id="produk-dinamis" class="js-product-grid"></div>
     </section>
     <section aria-labelledby="harga-title">
       <h2 id="harga-title" class="title-center">Daftar Produk</h2>
@@ -188,14 +202,6 @@
           </tbody>
         </table>
       </div>
-    </section>
-    <section class="section" aria-labelledby="produk-dinamis-title">
-      <div class="section-header">
-        <p class="eyebrow">Data JavaScript</p>
-        <h2 id="produk-dinamis-title">Produk dari Data Lokal</h2>
-        <p id="produk-ringkasan">Data produk akan dimuat melalui JavaScript.</p>
-      </div>
-      <div id="produk-dinamis" class="js-product-grid"></div>
     </section>
   </main>
   <footer class="site-footer">
