@@ -47,13 +47,15 @@ const produkUmkm = [
 
 console.table(produkUmkm);
 
-const formatRupiah = new Intl.NumberFormat("id-ID", {
-  style: "currency",
-  currency: "IDR",
-  maximumFractionDigits: 0,
-});
+function formatRupiah(nilai) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(nilai);
+}
 
-console.log(formatRupiah.format(produkUmkm[0].harga));
+console.log(formatRupiah(produkUmkm[0].harga));
 
 function statusStok(stok) {
   if (stok === 0) {
@@ -66,6 +68,10 @@ function statusStok(stok) {
 
   return { label: "Tersedia", className: "" };
 }
+
+console.log(statusStok(0));
+console.log(statusStok(3));
+console.log(statusStok(12));
 
 function labelUnggulan(unggulan) {
   return unggulan ? "Produk unggulan" : "Produk reguler";
@@ -82,66 +88,55 @@ function labelKategori(kategori) {
   }
 }
 
-const labelAksi = produkUmkm.stok > 0 ? "Siap dipesan" : "Hubungi admin";
+function buatKartuProduk(produk) {
+  const status = statusStok(produk.stok);
+
+  return `
+    <article class="js-product-card${produk.unggulan ? " is-unggulan" : ""}">
+        <p class="js-product-kategori">${labelKategori(produk.kategori)}</p>
+        <h3>${produk.nama}</h3>
+        <p class="js-product-deskripsi">${produk.deskripsi}</p>
+        <p class="price">${formatRupiah(produk.harga)}</p>
+        <span class="stock-badge ${status.className}">${status.label}</span>
+        <p class="js-product-unggulan">${labelUnggulan(produk.unggulan)}</p>
+        <p class="js-product-aksi">${labelAksi(produk.stok)}</p>
+      </article>
+  `;
+}
+function labelAksi(stok) {
+  return stok > 0 ? "Siap dipesan" : "Hubungi admin";
+}
 
 function renderProduk() {
   const grid = document.querySelector("#produk-dinamis");
   const ringkasan = document.querySelector("#produk-ringkasan");
+  const unggulan = document.querySelector("#produk-unggulan");
+  
+  produkUmkm.forEach((produk) => {
+    console.log("Debug produk:", produk.nama, "stok:", produk.stok);
+  });
 
-  // Penjaga: halaman lain tetap bebas error karena hanya produk.html
-  // yang menyediakan kedua elemen ini.
-  if (!grid || !ringkasan) {
+  console.table(produkUmkm);
+
+  // Halaman lain tidak menyediakan elemen produk dinamis.
+  if (!grid || !ringkasan || !unggulan) {
     return;
   }
 
   console.log("P09 JavaScript aktif di halaman produk");
   console.table(produkUmkm);
+  
+  const produkTersedia = produkUmkm.filter((produk) => produk.stok > 0);
+  const produkUnggulan = produkUmkm.find((produk) => produk.unggulan === true);
+  const markupProduk = produkTersedia.map(buatKartuProduk).join("");
 
-  let jumlahTersedia = 0;
-  let jumlahUnggulan = 0;
-  let nilaiStok = 0;
-  let markup = "";
+  grid.innerHTML = markupProduk;
+  ringkasan.textContent = `${produkTersedia.length} produk tersedia dari ${produkUmkm.length} data.`;
+  unggulan.textContent = produkUnggulan
+    ? `Produk unggulan: ${produkUnggulan.nama}`
+    : "Belum ada produk unggulan.";
 
-  for (const produk of produkUmkm) {
-    const status = statusStok(produk.stok);
-    const kategori = labelKategori(produk.kategori);
-    const unggulan = labelUnggulan(produk.unggulan);
-    const aksi = produk.stok > 0 ? "Siap dipesan" : "Hubungi admin untuk restock";
-
-    // Operator aritmetika untuk ringkasan
-    nilaiStok += produk.harga * produk.stok;
-
-    if (produk.stok > 0) {
-      jumlahTersedia++;
-    }
-
-    if (produk.unggulan) {
-      jumlahUnggulan++;
-    }
-    markup += `
-      <article class="js-product-card${produk.unggulan ? " is-unggulan" : ""}">
-        <p class="js-product-kategori">${kategori}</p>
-        <h3>${produk.nama}</h3>
-        <p class="js-product-deskripsi">${produk.deskripsi}</p>
-        <p class="price">${formatRupiah.format(produk.harga)}</p>
-        <span class="stock-badge ${status.className}">${status.label}</span>
-        <p class="js-product-unggulan">${unggulan}</p>
-        <p class="js-product-aksi">${aksi}</p>
-      </article>
-    `;
-  }
-
-   grid.innerHTML = markup.trim();
-
-  const total = produkUmkm.length;
-  const jumlahHabis = total - jumlahTersedia;
-
-  ringkasan.textContent =
-    jumlahHabis > 0
-      ? `${jumlahTersedia} dari ${total} produk siap dipesan, ${jumlahHabis} produk perlu restock. ${jumlahUnggulan} produk berlabel unggulan. Nilai stok ${formatRupiah.format(nilaiStok)}.`
-      : `Semua ${total} produk siap dipesan. ${jumlahUnggulan} produk berlabel unggulan. Nilai stok ${formatRupiah.format(nilaiStok)}.`;
-
-  console.log("Render selesai:", jumlahTersedia, "produk tersedia dari", total, "data");
+  console.table(produkUmkm);
 }
 
 function initMobileNavigation() {
