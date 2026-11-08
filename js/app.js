@@ -1,6 +1,6 @@
 "use strict";
 
-console.log("P09 JavaScript aktif");
+console.log("P10 JavaScript aktif");
 
 const produkUmkm = [
   {
@@ -48,11 +48,7 @@ const produkUmkm = [
 console.table(produkUmkm);
 
 function formatRupiah(nilai) {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  }).format(nilai);
+  return `Rp${new Intl.NumberFormat("id-ID").format(nilai)}`;
 }
 
 console.log(formatRupiah(produkUmkm[0].harga));
@@ -66,7 +62,7 @@ function statusStok(stok) {
     return { label: "Stok terbatas", className: "warning" };
   }
 
-  return { label: "Tersedia", className: "" };
+  return { label: "Tersedia", className: "tersedia" };
 }
 
 console.log(statusStok(0));
@@ -88,6 +84,10 @@ function labelKategori(kategori) {
   }
 }
 
+function labelAksi(stok) {
+  return stok > 0 ? "Siap dipesan" : "Hubungi admin";
+}
+
 function buatKartuProduk(produk) {
   const status = statusStok(produk.stok);
 
@@ -103,31 +103,23 @@ function buatKartuProduk(produk) {
       </article>
   `;
 }
-function labelAksi(stok) {
-  return stok > 0 ? "Siap dipesan" : "Hubungi admin";
-}
+
 
 function renderProduk() {
   const grid = document.querySelector("#produk-dinamis");
   const ringkasan = document.querySelector("#produk-ringkasan");
   const unggulan = document.querySelector("#produk-unggulan");
-  
-  produkUmkm.forEach((produk) => {
-    console.log("Debug produk:", produk.nama, "stok:", produk.stok);
-  });
 
-  console.table(produkUmkm);
-
-  // Halaman lain tidak menyediakan elemen produk dinamis.
   if (!grid || !ringkasan || !unggulan) {
     return;
   }
 
-  console.log("P09 JavaScript aktif di halaman produk");
-  console.table(produkUmkm);
-  
+  produkUmkm.forEach((produk) => {
+    console.log("Debug produk:", produk.nama, "stok:", produk.stok);
+  });
+
   const produkTersedia = produkUmkm.filter((produk) => produk.stok > 0);
-  const produkUnggulan = produkUmkm.find((produk) => produk.unggulan === true);
+  const produkUnggulan = produkUmkm.find((produk) => produk.unggulan);
   const markupProduk = produkTersedia.map(buatKartuProduk).join("");
 
   grid.innerHTML = markupProduk;
@@ -137,6 +129,7 @@ function renderProduk() {
     : "Belum ada produk unggulan.";
 
   console.table(produkUmkm);
+  console.table(produkTersedia);
 }
 
 function initMobileNavigation() {
