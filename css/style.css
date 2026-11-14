@@ -634,3 +634,30 @@ h1, h2, h3 {
   background: #ffffff;
   color: #64748b;
 }
+
+.produk-status {
+  margin: 0.35rem 0 0;
+  font-weight: 700;
+  color: var(--color-primary, #6f3b1f);
+}
+
+.category-note {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted, #57534e);
+}
+
+.card-note {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-muted, #57534e);
+}
+
+.product-card.is-unggulan {
+  border-color: #b45309;
+  box-shadow: 0 0 0 1px #fbbf24 inset;
+}
