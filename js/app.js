@@ -1,6 +1,6 @@
 "use strict";
 
-console.log("P11 JavaScript aktif");
+console.log("P12 JavaScript aktif");
 
 const produkUmkm = [
   {

@@ -29,9 +29,19 @@ function muatPreferensi() {
   }
 }
 
+const tombolHapus = document.querySelector("#hapus-preferensi");
+
 form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    simpanPreferensi();
+  event.preventDefault();
+  if (!form.checkValidity()) return;
+  simpanPreferensi();
+});
+
+tombolHapus?.addEventListener("click", () => {
+  localStorage.removeItem(STORAGE_KEY);
+  form.reset();
+  formFeedback.textContent = "Preferensi tersimpan berhasil dihapus.";
+  formFeedback.classList.remove("success");
 });
 
 document.addEventListener("DOMContentLoaded", () => {

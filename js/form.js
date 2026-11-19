@@ -1,13 +1,20 @@
 const form = document.querySelector("#form-kontak");
 const preview = document.querySelector("#preview-form");
 const formFeedback = document.querySelector("#form-feedback");
-const fields = ["nama", "email", "telepon", "paket", "pesan"].map((id) => document.querySelector(`#${id}`));
+const fields = ["nama", "email", "telepon", "paket", "pesan", "setuju"].map((id) =>
+  document.querySelector(`#${id}`)
+);
 const topikInputs = document.querySelectorAll('input[name="topik"]');
 
 function getFieldError(field) {
   const validity = field.validity;
 
-  if (validity.valueMissing) return "Bagian ini wajib diisi.";
+  if (validity.valueMissing) {
+    if (field.type === "checkbox") {
+      return "Konfirmasi persetujuan wajib dicentang.";
+    }
+    return "Bagian ini wajib diisi.";
+  }
   if (validity.typeMismatch) return "Format data belum sesuai.";
   if (validity.tooShort) return `Isi minimal ${field.minLength} karakter.`;
   if (validity.patternMismatch) return "Format belum sesuai contoh yang diminta.";
@@ -58,6 +65,7 @@ function tampilkanPreview() {
     `Paket: ${data.get("paket")}`,
     `Topik: ${data.get("topik")}`,
     `Pesan: ${data.get("pesan")}`,
+    `Persetujuan: ${data.has("setuju") ? "Disetujui" : "Belum disetujui"}`,
   ].join("\n");
 
   formFeedback.textContent = "Form valid. Preview berhasil dibuat.";

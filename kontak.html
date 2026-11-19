@@ -81,11 +81,22 @@
                 <label for="pesan">Pesan</label>
                 <textarea id="pesan" name="pesan" rows="4"
                     placeholder="Tulis pesan dan kesan anda terhadap pelayanan kami" required=""
-                    minlength="10" aria-describedby="pesan-error"></textarea>
+                    minlength="20" aria-describedby="pesan-error"></textarea>
                 <p id="pesan-error" class="field-error" aria-live="polite"></p>
             </div>
 
+            <div class="field field-checkbox">
+                <label class="checkbox-label" for="setuju">
+                    <input id="setuju" name="setuju" type="checkbox" value="ya" required
+                        aria-describedby="setuju-error">
+                    <span>Saya menyetujui data yang dikirim digunakan untuk keperluan tindak lanjut pesan.</span>
+                </label>
+                <p id="setuju-error" class="field-error" aria-live="polite"></p>
+            </div>
+
             <button type="submit">Tampilkan Preview</button>
+            <button type="button" id="hapus-preferensi">Hapus Preferensi</button>
+            <p id="form-feedback" class="form-feedback" aria-live="polite"></p>
             <p id="form-feedback" class="form-feedback" aria-live="polite"></p>
         </form>
         <section aria-labelledby="preview-title">
